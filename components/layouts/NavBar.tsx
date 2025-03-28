@@ -12,7 +12,7 @@ const NavBar = () => {
   return (
     <div className="bg-[#dfc4db] py-4 text-gray-600 relative ">
       {/* Larger Screen */}
-      <div className="hidden md:flex justify-center items-center gap-8 font-bold text-xl">
+      <div className="hidden md:flex justify-evenly items-center gap-5 font-bold text-xl px-72">
         <Link href={"#"} className="hover:bg-[#733068] hover:text-gray-50 p-3 rounded-xl">Home</Link>
         <Link href={"#"} className="hover:bg-[#733068] hover:text-gray-50 p-3 rounded-xl">Who We Are?</Link>
         <Link href={"#"} className="hover:bg-[#733068] hover:text-gray-50 p-3 rounded-xl">Service</Link>
