@@ -16,7 +16,7 @@ const Topbar = () => {
        <h1 className="flex flex-col"><span className="text-2xl text-[#99408b] font-bold">Vedic Healing Center</span><span className="text-[#99408b]">Healing Through Reiki</span></h1>
       </div>
       <div className="">
-        <Button className="text-lg font-semibold bg-[#99408b] hover:bg-[#5c2653] text-gray-50 py-6 cursor-pointer">Book An Appointment</Button>
+        <Button className="text-lg font-semibold bg-[#99408b] hover:bg-[#8a3a7d] text-gray-50 py-6 cursor-pointer">Book An Appointment</Button>
       </div>
     </div>
   )
