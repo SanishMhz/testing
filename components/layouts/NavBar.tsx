@@ -67,7 +67,7 @@ const NavBar = () => {
         {/* Side Navbar */}
         <div className="absolute right-2 top-7">
           <button onClick={() => setOpenMenu((prev) => !prev)} className="p-1">
-            <RiMenuFill size={28} className="text-[#99408b]" />
+            <RiMenuFill size={24} className="text-[#99408b]" />
           </button>
         </div>
 

@@ -11,7 +11,7 @@ const Achievement = () => {
   });
   return (
     <div
-      className="flex flex-col md:flex-row justify-evenly items-center bg-[#dfc4db] px-2 py-4 gap-2 md:gap-6"
+      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-8 bg-[#dfc4db] px-4 sm:px-8 md:px-12 lg:px-16 py-16 my-4 md:gap-10"
       ref={ref}
     >
       {/* First item */}
@@ -23,7 +23,7 @@ const Achievement = () => {
             width={0}
             height={0}
             sizes="100vw"
-            className="w-20 h-20"
+            className="w-14 h-14 sm:w-20 sm:h-20"
           />
         </div>
         <div>
@@ -48,7 +48,7 @@ const Achievement = () => {
             width={0}
             height={0}
             sizes="100vw"
-            className="w-20 h-20"
+            className="w-14 h-14 sm:w-20 sm:h-20"
           />
         </div>
         <div>
@@ -74,7 +74,7 @@ const Achievement = () => {
             width={0}
             height={0}
             sizes="100vw"
-            className="w-20 h-20"
+            className="w-14 h-14 sm:w-20 sm:h-20"
           />
         </div>
         <div>
@@ -99,7 +99,7 @@ const Achievement = () => {
             width={0}
             height={0}
             sizes="100vw"
-            className="w-20 h-20"
+            className="w-14 h-14 sm:w-20 sm:h-20"
           />
         </div>
         <div>

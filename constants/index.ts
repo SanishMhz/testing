@@ -85,3 +85,69 @@ export const trainingList: ChooseCardType[] = [
       "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2baxggMnf17oXLnFJzKRYel2pUbgaWkGArf1qZQ",
   },
 ];
+
+export const serviceList: ServiceCardType[] = [
+  {
+    id: "1",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+    title: "Sound Healing Session",
+  },
+  {
+    id: "2",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+    title: "Advanced Kundalini Healing",
+  },
+  {
+    id: "3",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+    title: "Vibration Massage Therapy",
+  },
+  {
+    id: "4",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+    title: "Balancing Therapy",
+  },
+  {
+    id: "5",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+    title: "Reiki Healing",
+  },
+  {
+    id: "6",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+    title: "Hypnotherapy",
+  },
+  {
+    id: "7",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+    title: "Past Life Regression Therapy",
+  },
+  {
+    id: "8",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+    title: "Sound bath / Gong Bath",
+  },
+  {
+    id: "9",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+    title: "Yoga(Hatha) Training",
+  },
+];
+
+export const about = `The journey of Vedic healing was founded out of a profound personal journey of founder/Sound
+Healing Master, Mr. Amit Shrestha. This journey was deeply influenced by his strong interest in
+music and spiritual wellness. After experiencing the transformative effects of sound heling first
+hand, he is dedicated to helping people in discovering self-actualization and spiritual growth.
+Through interactions with various individuals facing different challenges, Mr. Shrestha practiced
+healing methods like Reiki, Meditation, and Hypnosis. Vedic Healing is focused on helping
+people overcome physical and psychological issues by offering personalized sessions aimed at
+improving their mental, physical, and spiritual wellbeing.`;
