@@ -7,7 +7,7 @@ import ContactUs from "./ContactUs";
 
 const Connect = () => {
   return (
-    <div className="flex flex-col gap-4 py-8 bg-[#f5ecf3]  px-4 sm:px-8 md:px-12 lg:px-16">
+    <div className="flex flex-col gap-4 py-8  px-4 sm:px-8 md:px-12 lg:px-16">
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-[#361631] text-xl sm:text-2xl lg:text-3xl font-bold">
           LETS CONNECT
@@ -38,7 +38,7 @@ const Connect = () => {
         <ContactUs />
         <div className="w-full md:max-w-[40%] flex flex-col gap-8 text-gray-700">
           <iframe
-            className="w-full h-[300px] md:h-[400px] lg:h-[400px] rounded-2xl shadow-lg"
+            className="w-full h-[300px] md:h-[400px] lg:h-[400px] rounded-md md:rounded-lg shadow-lg"
             title="Map showing our location"
             aria-label="Map of our location"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2557.070259202348!2d85.30776397387447!3d27.715178276177994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb196b0cbc283f%3A0x5096a3a0ed84a780!2sVedic%20Healing%20(%20Sound%20Healing%2C%20Reiki%20Healing%2C%20Yoga%2C%20Meditation%2C%20Hypnotherapy%20%2C%20PLR%20%2C%20Kundalini%20%2CChakra%20Healing%20and%20Training%20)!5e1!3m2!1sen!2snp!4v1743147692540!5m2!1sen!2snp"
