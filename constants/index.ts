@@ -64,3 +64,24 @@ export const whyUsList: ChooseCardType[] = [
       "Easily accessible in Thamel (Opposite of kathmandu guest house)",
   },
 ];
+
+export const trainingList: ChooseCardType[] = [
+  {
+    description: "Learn the art of healing through sound vibration",
+    title: "Sound Healing Training",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bazGY6C4WI9dpwBFHLvnDQTCtimh0xE452rG7q",
+  },
+  {
+    description: "Become a certified Reiki training",
+    title: "Reiki Training",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2bahEyMqhnugboI0SjfYMai5ONR6WyKmTkPpu83",
+  },
+  {
+    description: "Develop deep meditative techniques",
+    title: "Meditation and Mindfulness Training",
+    image:
+      "https://s5ronyp76h.ufs.sh/f/qNnxVbCeM2baxggMnf17oXLnFJzKRYel2pUbgaWkGArf1qZQ",
+  },
+];
