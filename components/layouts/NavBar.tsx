@@ -10,42 +10,42 @@ import Image from "next/image";
 const NavBar = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   return (
-    <div className="bg-[#dfc4db] py-4 text-gray-600 relative ">
+    <div className="bg-[#dfc4db] py-3 text-gray-600 relative px-4 sm:px-8 md:px-12 lg:px-16">
       {/* Larger Screen */}
-      <div className="hidden md:flex justify-evenly items-center gap-5 font-bold text-xl px-72">
+      <div className="hidden md:flex justify-end gap-4 items-center font-bold text-xl">
         <Link
           href={"#"}
-          className="hover:bg-[#733068] hover:text-gray-50 p-3 rounded-xl"
+          className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Home
         </Link>
         <Link
           href={"#"}
-          className="hover:bg-[#733068] hover:text-gray-50 p-3 rounded-xl"
+          className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Who We Are?
         </Link>
         <Link
           href={"#"}
-          className="hover:bg-[#733068] hover:text-gray-50 p-3 rounded-xl"
+          className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Service
         </Link>
         <Link
           href={"#"}
-          className="hover:bg-[#733068] hover:text-gray-50 p-3 rounded-xl"
+          className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Success Stories
         </Link>
         <Link
           href={"#"}
-          className="hover:bg-[#733068] hover:text-gray-50 p-3 rounded-xl"
+          className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Let's Connect
         </Link>
         <Link
           href={"#"}
-          className="hover:bg-[#733068] hover:text-gray-50 p-3 rounded-xl"
+          className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Login/Register
         </Link>
@@ -66,9 +66,9 @@ const NavBar = () => {
         </div>
         {/* Side Navbar */}
         <div className="absolute right-2 top-7">
-          <Button onClick={() => setOpenMenu((prev) => !prev)}>
-            <RiMenuFill size={60} className="text-white" />
-          </Button>
+          <button onClick={() => setOpenMenu((prev) => !prev)} className="p-1">
+            <RiMenuFill size={28} className="text-[#99408b]" />
+          </button>
         </div>
 
         <div
@@ -76,12 +76,9 @@ const NavBar = () => {
             openMenu ? "flex" : "hidden"
           } flex-col items-end p-4 h-screen bg-[#f5ecf3] gap-4 text-gray-900`}
         >
-          <Button
-            className="text-xl"
-            onClick={() => setOpenMenu((prev) => !prev)}
-          >
-            <IoClose size={30} />
-          </Button>
+          <button onClick={() => setOpenMenu((prev) => !prev)}>
+            <IoClose size={24} className="text-[#99408b]" />
+          </button>
           <div className="flex flex-col gap-2 text-base items-start space-y-5 px-2">
             <div className="flex justify-between items-center gap-2 ">
               <Image
