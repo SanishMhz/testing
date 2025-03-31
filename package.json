@@ -25,6 +25,7 @@
     "react-intersection-observer": "^9.16.0",
     "tailwind-merge": "^3.0.2",
     "tw-animate-css": "^1.2.4",
+    "vedic": "file:",
     "zod": "^3.24.2"
   },
   "devDependencies": {
