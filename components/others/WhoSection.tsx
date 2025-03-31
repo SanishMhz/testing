@@ -1,48 +1,79 @@
-import Image from "next/image"
+"use client";
+import { about } from "@/constants";
+import Image from "next/image";
+import { useState } from "react";
 
 const WhoSection = () => {
+  const [open, setOpen] = useState(false);
   return (
-    <div className="py-5">
-      <h1 className="text-2xl lg:text-3xl text-[#5c2653] font-semibold text-center">Who We Are?</h1>
+    <div className="py-4 px-4 sm:px-8 md:px-12 lg:px-16">
+      <h1 className="text-2xl lg:text-3xl text-[#361631] font-bold text-center">
+        WHO WE ARE?
+      </h1>
       {/* Business Story */}
-      <div className="flex flex-col md:flex-row justify-center px-2 md:px-10 lg:px-20 py-4 gap-5">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 items-center py-6 gap-5">
         {/* First Section */}
-        <div className="flex-2 space-y-3">
-          <p className="text-lg text-gray-700 text-justify ml-0 md:ml-4">The journey of Vedic healing was founded out of a profound personal journey of founder/Sound Healing Master, Mr. Amit Shrestha. This journey was deeply influenced by his strong interest in music and spiritual wellness. After experiencing the transformative effects of sound heling first hand, he is dedicated to helping people in discovering self-actualization and spiritual growth. Through interactions with various individuals facing different challenges, Mr. Shrestha practiced healing methods like Reiki, Meditation, and Hypnosis. Vedic Healing is focused on helping people overcome physical and psychological issues by offering personalized sessions aimed at improving their mental, physical, and spiritual wellbeing.</p>
-          <h1 className="ml-0 md:ml-4"><span className="text-xl text-[#99408b] font-bold">Mission Statement:</span><span>आफनो लागी साधना अरु को लागी सेवा.</span></h1>
+        <div className="space-y-3">
+          <p className="hidden lg:block text-lg text-gray-700 text-justify">
+            {about}
+          </p>
+          <p className="lg:hidden text-lg text-gray-700 text-justify max-w-2xl">
+            {open ? about : about.slice(0, 320)}
+            <button
+              className="sm:ps-2 font-semibold underline cursor-pointer underline-offset-4"
+              onClick={() => setOpen((prev) => !prev)}
+            >
+              {open ? "Read Less" : "Read More"}
+            </button>
+          </p>
+          <h1>
+            <span className="text-xl text-[#5c2653] font-bold">
+              Mission Statement :
+            </span>
+            <span className="text-lg"> आफनो लागी साधना अरु को लागी सेवा.</span>
+          </h1>
         </div>
         {/* Second Section */}
-        <div className="w-full flex-1">
+        <div className="w-full">
           <Image
-          src="/who.jpg"
-          alt="Image"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-full lg:w-96 h-72 object-cover rounded-2xl"
-           />
+            src="/who.jpg"
+            alt="Image"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-72 sm:h-80 object-cover rounded-md"
+          />
         </div>
       </div>
-     {/* Background Story */}
-     <div className="flex flex-col md:flex-row justify-center items-center gap-5 px-5 md:px-10 lg:px-24">
-      {/* First Section */}
-      <div className="w-full lg:w-1/2">
-        <Image
-        src="/meditation.jpg"
-        alt="Meditation"
-        width={0}
-        height={0}
-        sizes="100vw"
-        className="w-full md:w-96 h-96 object-cover"
-        />
+      {/* Background Story */}
+      <div className="flex flex-col-reverse md:flex-row justify-center items-center gap-5 py-6">
+        {/* First Section */}
+        <div className="w-full">
+          <Image
+            src="/meditation.jpg"
+            alt="Meditation"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-72 md:h-80 lg:h-96 object-cover rounded-md"
+          />
+        </div>
+        {/* Second Section */}
+        <div className="space-y-2 md:max-w-1/2">
+          <h1 className="text-xl lg:text-2xl text-[#5c2653] font-bold">
+            Business/Brand Story
+          </h1>
+          <p className="text-justify text-gray-700 text-lg">
+            The founder, Mr. Amit Shrestha, is a dedicated Sound Healing Master
+            with over 9 years of experience and 21 years of practice in Reiki
+            healing. His sessions and teaching approach blend ancient healing
+            methods with scientific reasoning. With a deep passion for music,
+            his sessions are harmoniously tailored to suit the needs of various
+            individuals.
+          </p>
+        </div>
       </div>
-      {/* Second Section */}
-      <div className="space-y-2">
-        <h1 className="text-xl lg:text-2xl text-[#5c2653] font-semibold">Business/Brand Story</h1>
-        <p className="text-justify text-gray-700">The founder, Mr. Amit Shrestha, is a dedicated Sound Healing Master with over 9 years of experience and 21 years of practice in Reiki healing. His sessions and teaching approach blend ancient healing methods with scientific reasoning. With a deep passion for music, his sessions are harmoniously tailored to suit the needs of various individuals.</p>
-      </div>
-     </div>
     </div>
-  )
-}
-export default WhoSection
+  );
+};
+export default WhoSection;

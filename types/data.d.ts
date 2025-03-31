@@ -7,3 +7,8 @@ type ChooseCardType = {
   title: string;
   description: string;
 };
+type ServiceCardType = {
+  image: string;
+  title: string;
+  id: string;
+};
