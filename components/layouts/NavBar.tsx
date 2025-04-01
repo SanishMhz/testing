@@ -1,22 +1,11 @@
 "use client";
+
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { RiMenuFill } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Login } from "../others/Login";
-import { Register } from "../others/Register";
-import AppointmentForm from "../others/AppointmentForm";
 
 const NavBar = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -25,31 +14,31 @@ const NavBar = () => {
       {/* Larger Screen */}
       <div className="hidden md:flex justify-end gap-4 items-center font-bold text-xl">
         <Link
-          href={"#home"}
+          href={"#"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Home
         </Link>
         <Link
-          href={"#about"}
+          href={"#"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Who We Are?
         </Link>
         <Link
-          href={"#service"}
+          href={"#"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Service
         </Link>
         <Link
-          href={"#stories"}
+          href={"#"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Success Stories
         </Link>
         <Link
-          href={"#connect"}
+          href={"#"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Let's Connect
@@ -58,38 +47,7 @@ const NavBar = () => {
           href={"#"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
-          <div>
-            <Dialog>
-              <DialogTrigger className="cursor-pointer">
-                Login/Register
-              </DialogTrigger>
-              <DialogContent className="">
-                <DialogHeader>
-                  <DialogTitle>
-                    <Tabs defaultValue="" className="w-full">
-                      <TabsList className="text-[#5c2653] cursor-pointer  ml-32 md:ml-52">
-                        <TabsTrigger value="login" className="cursor-pointer">
-                          Login
-                        </TabsTrigger>
-                        <TabsTrigger
-                          value="register"
-                          className="cursor-pointer"
-                        >
-                          Register
-                        </TabsTrigger>
-                      </TabsList>
-                      <TabsContent value="login">
-                        <Login />
-                      </TabsContent>
-                      <TabsContent value="register">
-                        <Register />
-                      </TabsContent>
-                    </Tabs>
-                  </DialogTitle>
-                </DialogHeader>
-              </DialogContent>
-            </Dialog>
-          </div>
+          Login/Register
         </Link>
       </div>
       {/* mobile screen  */}
@@ -109,7 +67,7 @@ const NavBar = () => {
         {/* Side Navbar */}
         <div className="absolute right-2 top-7">
           <button onClick={() => setOpenMenu((prev) => !prev)} className="p-1">
-            <RiMenuFill size={24} className="text-[#99408b]  cursor-pointer" />
+            <RiMenuFill size={24} className="text-[#99408b]" />
           </button>
         </div>
 
@@ -119,7 +77,7 @@ const NavBar = () => {
           } flex-col items-end p-4 h-screen bg-[#f5ecf3] gap-4 text-gray-900`}
         >
           <button onClick={() => setOpenMenu((prev) => !prev)}>
-            <IoClose size={24} className="text-[#99408b] cursor-pointer" />
+            <IoClose size={24} className="text-[#99408b]" />
           </button>
           <div className="flex flex-col gap-2 text-base items-start space-y-5 px-2">
             <div className="flex justify-between items-center gap-2 ">
@@ -150,60 +108,14 @@ const NavBar = () => {
             <Link href="#contact" onClick={() => setOpenMenu(false)}>
               Let's Connect
             </Link>
-            <Link href="#" onClick={() => setOpenMenu(false)}>
-              <div>
-                <div>
-                  <Dialog>
-                    <DialogTrigger className="cursor-pointer">
-                      Login/Register
-                    </DialogTrigger>
-                    <DialogContent className="">
-                      <DialogHeader>
-                        <DialogTitle>
-                          <Tabs defaultValue="" className="w-full">
-                            <TabsList className="text-[#5c2653] cursor-pointer  ml-32 md:ml-52">
-                              <TabsTrigger
-                                value="login"
-                                className="cursor-pointer"
-                              >
-                                Login
-                              </TabsTrigger>
-                              <TabsTrigger
-                                value="register"
-                                className="cursor-pointer"
-                              >
-                                Register
-                              </TabsTrigger>
-                            </TabsList>
-                            <TabsContent value="login">
-                              <Login />
-                            </TabsContent>
-                            <TabsContent value="register">
-                              <Register />
-                            </TabsContent>
-                          </Tabs>
-                        </DialogTitle>
-                      </DialogHeader>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              </div>
+            <Link href="#contact" onClick={() => setOpenMenu(false)}>
+              Login/Register
             </Link>
             {/* Button */}
             <div className="">
-              <Dialog>
-                <DialogTrigger className="text-xl font-semibold bg-[#99408b] hover:bg-[#8a3a7d] text-gray-50 p-2 cursor-pointer rounded-lg">
-                  Book An Appointment
-                </DialogTrigger>
-                <DialogContent className="w-full md:w-[50%] max-h-[98%] lg:max-h-[90%] overflow-auto bg-white border-none space-y-6">
-                  <DialogHeader>
-                    <DialogTitle className="text-center font-bold text-xl md:text-2xl text-[#99408b]">
-                      Book Your Appointment
-                    </DialogTitle>
-                  </DialogHeader>
-                  <AppointmentForm />
-                </DialogContent>
-              </Dialog>
+              <Button className="text-base font-semibold bg-[#99408b] hover:bg-[#5c2653] text-gray-50 py-4 cursor-pointer">
+                Book An Appointment
+              </Button>
             </div>
           </div>
         </div>
