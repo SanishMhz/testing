@@ -151,3 +151,42 @@ Through interactions with various individuals facing different challenges, Mr. S
 healing methods like Reiki, Meditation, and Hypnosis. Vedic Healing is focused on helping
 people overcome physical and psychological issues by offering personalized sessions aimed at
 improving their mental, physical, and spiritual wellbeing.`;
+
+export const BookList = [
+  {
+    value: "soundBath/gongBath",
+    label: "Sound Bath/Gong Bath",
+  },
+  {
+    value: "yogaTraining",
+    label: "Yoga(Hatha Yoga) Training",
+  },
+  {
+    value: "balanceTherapy",
+    label: "Balancing Therapy",
+  },
+  {
+    value: "pastlife",
+    label: "Past Life Regression Sound Bath/Gong Bath",
+  },
+  {
+    value: "hypnotherapy",
+    label: "Hypnotherapy",
+  },
+  {
+    value: "reiki",
+    label: "Reiki Healing",
+  },
+  {
+    value: "vibration",
+    label: "Vibration Massage Balancing Therapy",
+  },
+  {
+    value: "kundalini",
+    label: "Advanced Kundalini Healing",
+  },
+  {
+    value: "soundhealing",
+    label: "Sound Healing Session",
+  }
+];

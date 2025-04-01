@@ -1,5 +1,15 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import AppointmentForm from "../others/AppointmentForm";
 
 const Topbar = () => {
   return (
@@ -16,9 +26,21 @@ const Topbar = () => {
         </h1>
       </div>
       <div className="">
-        <Button className="text-lg font-semibold bg-[#99408b] hover:bg-[#8a3a7d] text-gray-50 py-6 cursor-pointer">
-          Book An Appointment
-        </Button>
+        {/* Booking Form */}
+        <Dialog>
+          <DialogTrigger className="text-lg font-semibold bg-[#99408b] hover:bg-[#8a3a7d] text-gray-50 p-2 cursor-pointer rounded-lg">
+            Book An Appointment
+          </DialogTrigger>
+          <DialogContent className="w-full md:w-[50%] max-h-[98%] lg:max-h-[90%] overflow-auto bg-white border-none space-y-6">
+            <DialogHeader>
+              <DialogTitle className="text-center font-bold text-lg md:text-2xl text-[#99408b]">
+                Book Your  Appointment
+              </DialogTitle>
+            </DialogHeader>
+            <AppointmentForm />
+          </DialogContent>
+        </Dialog>
+      
       </div>
     </div>
   );
