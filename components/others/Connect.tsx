@@ -7,7 +7,7 @@ import ContactUs from "./ContactUs";
 
 const Connect = () => {
   return (
-    <div className="flex flex-col gap-4 py-8  px-4 sm:px-8 md:px-12 lg:px-16">
+    <div className="flex flex-col gap-4 py-8  px-4 sm:px-8 md:px-12 lg:px-16" id="connect">
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-[#361631] text-xl sm:text-2xl lg:text-3xl font-bold">
           LETS CONNECT

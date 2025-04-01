@@ -14,31 +14,31 @@ const NavBar = () => {
       {/* Larger Screen */}
       <div className="hidden md:flex justify-end gap-4 items-center font-bold text-xl">
         <Link
-          href={"#"}
+          href={"#home"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Home
         </Link>
         <Link
-          href={"#"}
+          href={"#about"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Who We Are?
         </Link>
         <Link
-          href={"#"}
+          href={"#service"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Service
         </Link>
         <Link
-          href={"#"}
+          href={"#stories"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Success Stories
         </Link>
         <Link
-          href={"#"}
+          href={"#connect"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Let's Connect

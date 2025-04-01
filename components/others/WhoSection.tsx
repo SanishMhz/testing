@@ -6,7 +6,7 @@ import { useState } from "react";
 const WhoSection = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="py-4 px-4 sm:px-8 md:px-12 lg:px-16">
+    <div className="py-4 px-4 sm:px-8 md:px-12 lg:px-16" id="about">
       <h1 className="text-2xl lg:text-3xl text-[#361631] font-bold text-center">
         WHO WE ARE?
       </h1>

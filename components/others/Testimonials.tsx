@@ -16,9 +16,9 @@ const Testimonials = () => {
   const plugin = React.useRef(
     Autoplay({ delay: 2500, stopOnInteraction: true })
   );
-  //
+  
   return (
-    <div className="px-4 sm:px-8 md:px-12 lg:px-16 py-10 flex flex-col gap-6 sm:gap-8">
+    <div className="px-4 sm:px-8 md:px-12 lg:px-16 py-10 flex flex-col gap-6 sm:gap-8" id="stories">
       <h1 className="text-[#361631] text-xl sm:text-2xl lg:text-3xl font-bold text-center">
         SUCCESS STORIES
       </h1>
