@@ -16,7 +16,7 @@ const WhyChooseCard = ({ image, title, description }: ChooseCardType) => {
       </div>
       <div className="flex flex-col gap-2 p-4">
         <h1 className="text-xl font-bold text-center">{title}</h1>
-        <p className="text-center font-medium">{description}</p>
+        <p className="text-justify font-medium px-3">{description}</p>
       </div>
     </div>
   );

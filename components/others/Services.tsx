@@ -1,9 +1,12 @@
+"use client";
 import { serviceList } from "@/constants";
 import React from "react";
 import ServiceCard from "../shared/ServiceCard";
-import { useRouter } from 'next/navigation'
+import { useGetServicesQuery } from "@/store/apiSlice";
 
 const Services = () => {
+  const {data:services}=useGetServicesQuery();
+  console.log(services)
   return (
     <div className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-8 md:px-12 lg:px-16 py-6" id="service">
       <div className="flex flex-col gap-4">
@@ -19,12 +22,12 @@ const Services = () => {
         </p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5">
-        {serviceList.map((item, index) => (
+        {services?.data.map((service) => (
           <ServiceCard
-            id={item.id}
-            image={item.image}
-            title={item.title}
-            key={index}
+            id={service.id}
+            image={service.image}
+            title={service.title}
+            key={service.id}
 
           />
         ))}

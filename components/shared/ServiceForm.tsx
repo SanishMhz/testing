@@ -1,3 +1,4 @@
+
 "use client";
 import {
   Form,
@@ -7,40 +8,30 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "../ui/button";
-import { BookList, timePeriodList } from "@/constants";
-import {
-  useGetServicesQuery,
-  useSubmitBookingMutation,
-} from "@/store/apiSlice";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { removeUser } from "@/store/userSlice";
-import { useGetUserProfileQuery } from "@/store/userApi";
+import { useGetSericesByIdQuery } from "@/store/apiSlice";
+import { useParams } from "next/navigation";
 
-const AppointmentForm = () => {
-  const [bookSubmit] = useSubmitBookingMutation();
-  const token: string | null = localStorage.getItem("token");
-  const { data: user } = useGetUserProfileQuery(token ?? "");
-  const dispatch = useDispatch();
-  const { data: service } = useGetServicesQuery();
 
-  console.log("userData :", user);
+const ServiceForm = () => {
+    const params=useParams();
+    const id=params?.id;
+  const {data:service}=useGetSericesByIdQuery(Number(id))
+
   const bookingFormSchema = z.object({
-    name: z.string().min(5, "Last name must be at least 5 characters").max(50),
+    firstName: z
+      .string()
+      .min(5, "First name must be at least 5 characters")
+      .max(50),
+    lastName: z
+      .string()
+      .min(5, "Last name must be at least 5 characters")
+      .max(50),
     contact: z
       .string()
       .length(10, "Contact must be exactly 10 digits")
@@ -51,31 +42,25 @@ const AppointmentForm = () => {
       .email({ message: "Invalid email address" })
       .trim(),
     service: z.string().trim(),
-    time_period: z.string().trim(),
+    description: z
+      .string()
+      .min(50, { message: "Message should be at least 50 characters." })
+      .max(500, { message: "Message should not exceed 500 characters." }),
   });
   const form = useForm<z.infer<typeof bookingFormSchema>>({
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
-      name: user ? user.name : "",
-      contact: user ? user.phone : "",
-      email: user ? user.email : "",
+      firstName: "",
+      lastName: "",
+      contact: "",
+      email: "",
       service: "",
-      time_period: "",
+      description: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof bookingFormSchema>) {
-    if (!token) {
-      dispatch(removeUser());
-    }
-    try {
-      await bookSubmit({
-        service: [values.service],
-        time_period: values.time_period,
-        total: 0,
-        token: token ?? "",
-      });
-    } catch (error) {}
+  function onSubmit(values: z.infer<typeof bookingFormSchema>) {
+    console.log(values);
   }
 
   return (
@@ -87,12 +72,25 @@ const AppointmentForm = () => {
         >
           <FormField
             control={form.control}
-            name="name"
+            name="firstName"
             render={({ field }) => (
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">First Name</FormLabel>
                 <FormControl>
                   <Input placeholder="Harry" {...field} className="w-full" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="lastName"
+            render={({ field }) => (
+              <FormItem className="space-y-1">
+                <FormLabel className="sm:text-lg">Last Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Porter" {...field} className="w-full" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -139,62 +137,39 @@ const AppointmentForm = () => {
             name="service"
             render={({ field }) => (
               <FormItem className="sm:col-span-2 space-y-1">
-                <FormLabel className="sm:text-lg">Book Your Service</FormLabel>
+                <FormLabel className="sm:text-lg">
+                  Book Your Service
+                </FormLabel>
                 <FormControl>
-                  {service?.data.map((title)=>(
-                    <Checkbox
-                    checked={field.value?.includes(title.id)}
-                    onCheckedChange={(checked) => {
-                      return checked
-                        ? field.onChange([...field.value, title.id])
-                        : field.onChange(
-                            field.value?.filter(
-                              (value) => value !== item.id
-                            )
-                          )
-                    }}
+                <Input
+                  value={service?.title || ""}
+                  readOnly
+                  className="w-full bg-gray-100 cursor-not-allowed" 
                   />
-                  ))}
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          {/* for Time Period */}
+
+          {/* Text Area for Message and Enquiry */}
           <FormField
             control={form.control}
-            name="service"
+            name="description"
             render={({ field }) => (
               <FormItem className="sm:col-span-2 space-y-1">
-                <FormLabel className="sm:text-lg">Time Period</FormLabel>
+                <FormLabel className="sm:text-lg">Message or Enquiry</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger className="w-full border-gray-500">
-                      <SelectValue placeholder="Select Services" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white overflow-auto">
-                      {timePeriodList.map((item, index) => (
-                        <SelectItem
-                          value={item.time}
-                          key={index}
-                          className="text-gray-950"
-                        >
-                          {item.time}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <Textarea
+                    placeholder="Type your message here."
+                    {...field}
+                    className="w-full h-40"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <div>
-            <h1>Total Amount:{}</h1>
-          </div>
           {/* Submit Button */}
           <div className="sm:col-span-2 py-4">
             <Button
@@ -210,4 +185,4 @@ const AppointmentForm = () => {
   );
 };
 
-export default AppointmentForm;
+export default ServiceForm;

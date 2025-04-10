@@ -13,16 +13,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Textarea } from "@/components/ui/textarea";
-// import { usePostContactMutation } from "@/store/apiSlice";
 import toast from "react-hot-toast";
+import { useSubmitContactMutation } from "@/store/apiSlice";
 
 const contactFormSchema = z.object({
-  firstName: z
+  first_name: z
     .string()
     .min(3, "First name must be at least 3 characters")
     .max(50),
-  lastName: z.string().min(3, "Last name must be at least 3 character").max(50),
-  contact: z
+  last_name: z.string().min(3, "Last name must be at least 3 character").max(50),
+  phone: z
     .string()
     .length(10, "Contact must be exactly 10 digits")
     .regex(/^\d+$/, "Contact must contain only numbers"),
@@ -31,42 +31,40 @@ const contactFormSchema = z.object({
     .min(2, { message: "Email is required" })
     .email({ message: "Invalid email address" })
     .trim(),
-  description: z
+  message: z
     .string()
     .min(1, { message: "Message is required" })
     .max(500, { message: "Message should not exceed 500 characters." }),
 });
 
 const ContactUs = () => {
-  // const [postContact] = usePostContactMutation();
+  const[submitContact]=useSubmitContactMutation();
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      contact: "",
+      first_name: "",
+      last_name: "",
+      phone: "",
       email: "",
-      description: "",
+      message: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof contactFormSchema>) => {
-    // const response = await postContact({
-    //   first_name: values.firstName,
-    //   last_name: values.lastName,
-    //   email: values.email,
-    //   message: values.description,
-    //   contact_number: values.contact,
-    // });
-    // if (response?.data) {
-    //   toast.success("Your message sent successfully, Thank you");
-    // } else {
-    //   toast.error(
-    //     "Failed to send your message, please try again later. Thank you"
-    //   );
-    // }
-    console.log("values", values);
-    form.reset();
+    try {
+      const response=await submitContact({
+        first_name:values.first_name,
+        last_name:values.last_name,
+        phone:values.phone,
+        message:values.message,
+        email:values.email
+       }).unwrap()
+       toast.success("Thank you for contacting us. We’ll get back to you shortly.")
+       form.reset()
+    } catch (error) {
+      toast.error("Something Went Wrong.Please Try Again!!!")
+    }
+    
   };
   return (
     <div className="flex flex-col gap-4 items-start w-full">
@@ -78,7 +76,7 @@ const ContactUs = () => {
           >
             <FormField
               control={form.control}
-              name="firstName"
+              name="first_name"
               render={({ field }) => (
                 <FormItem className="space-y-1">
                   <FormLabel className="sm:text-base">First Name</FormLabel>
@@ -91,7 +89,7 @@ const ContactUs = () => {
             />
             <FormField
               control={form.control}
-              name="lastName"
+              name="last_name"
               render={({ field }) => (
                 <FormItem className="space-y-1">
                   <FormLabel className="sm:text-base">Last Name</FormLabel>
@@ -104,7 +102,7 @@ const ContactUs = () => {
             />
             <FormField
               control={form.control}
-              name="contact"
+              name="phone"
               render={({ field }) => (
                 <FormItem className="space-y-1">
                   <FormLabel className="sm:text-base">Contact Number</FormLabel>
@@ -139,7 +137,7 @@ const ContactUs = () => {
             {/* Text Area for Message and Enquiry */}
             <FormField
               control={form.control}
-              name="description"
+              name="message"
               render={({ field }) => (
                 <FormItem className="sm:col-span-2 space-y-1">
                   <FormLabel className="sm:text-base">

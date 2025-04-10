@@ -190,3 +190,15 @@ export const BookList = [
     label: "Sound Healing Session",
   }
 ];
+
+export const timePeriodList=[
+  {
+    time:"30"
+  },
+  {
+    time:"60"
+  },
+  {
+    time:"90"
+  }
+]

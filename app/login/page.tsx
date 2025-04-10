@@ -2,6 +2,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { FaFacebook } from "react-icons/fa";
+import { AiFillGoogleCircle } from "react-icons/ai";
+import { FaApple } from "react-icons/fa";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 
@@ -21,6 +24,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "@/store/userSlice";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+
 
 const passwordSchema = z
   .string()
@@ -46,9 +50,9 @@ const formSchema = z.object({
 
 export function Login() {
   const [showPass, setShowPass] = useState<boolean | undefined>(false);
-  const [loginUser, { isLoading }] = useLoginUserMutation();
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const [loginUser,{isLoading}]=useLoginUserMutation()
+  const dispatch=useDispatch();
+  const router=useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,12 +62,14 @@ export function Login() {
     },
   });
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    
     try {
-      const res = await loginUser(values).unwrap();
-      dispatch(addUser(res.auth_token));
-      toast.success("Login successfull");
+      const res=await loginUser(values).unwrap()
+      dispatch(addUser(res))
+      toast.success("Login successfully")
+
     } catch (error) {
-      toast.error("User Not Found.Please Try Again!");
+      toast.error("Please Try Again!")
     }
   }
   return (
@@ -71,9 +77,7 @@ export function Login() {
       <div className="lg:flex justify-center items-center gap-5 space-y-5">
         <div className="lg:my-0 my-2 whitespace-nowrap flex flex-col items-center space-y-2">
           {/* {Left Section} */}
-          <h1 className="text-xl lg:text-3xl text-[#5c2653] font-bold mt-4">
-            Welcome Back!
-          </h1>
+          <h1 className="text-xl lg:text-3xl text-[#5c2653] font-bold mt-4">Welcome Back!</h1>
           <p className="text-xs lg:text-sm font-light">
             <span className="underline underline-offset-8 decoration-slate-950">
               Login to
@@ -135,10 +139,7 @@ export function Login() {
               )}
             />
             <div className="flex justify-center items-center mx-4">
-              <Button
-                type="submit"
-                className="w-48 lg:w-60 bg-[#99408b] hover:bg-[#8a3a7d] cursor-pointer"
-              >
+              <Button type="submit" className="w-48 lg:w-60 bg-[#99408b] hover:bg-[#8a3a7d] cursor-pointer">
                 Login
               </Button>
             </div>

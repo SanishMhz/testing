@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiMenuFill } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
@@ -13,50 +13,63 @@ import {
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Login } from "../others/Login";
-import { Register } from "../others/Register";
 import AppointmentForm from "../others/AppointmentForm";
+import { Register } from "../others/Register";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { removeUser } from "@/store/userSlice";
 
 const NavBar = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const {user}=useSelector((state:RootState)=>state.userSlice)
+  const isLoggedIn=user!==null;
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(removeUser());
+  };
   return (
     <div className="bg-[#dfc4db] py-3 text-gray-600 relative px-4 sm:px-8 md:px-12 lg:px-16">
       {/* Larger Screen */}
       <div className="hidden md:flex justify-end gap-4 items-center font-bold text-xl">
         <Link
-          href={"#"}
+          href={"#home"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Home
         </Link>
         <Link
-          href={"#"}
+          href={"#about"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Who We Are?
         </Link>
         <Link
-          href={"#"}
+          href={"#service"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Service
         </Link>
         <Link
-          href={"#"}
+          href={"#success"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Success Stories
         </Link>
         <Link
-          href={"#"}
+          href={"#connect"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
           Let's Connect
         </Link>
-        <Link
-          href={"#"}
-          className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
-        >
-          <div>
+        {isLoggedIn ? (
+          <div
+            className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded cursor-pointer"
+            onClick={handleLogout}
+          >
+            Logout
+          </div>
+        ) : (
+          <div className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded">
             <Dialog>
               <DialogTrigger className="cursor-pointer">
                 Login/Register
@@ -88,7 +101,7 @@ const NavBar = () => {
               </DialogContent>
             </Dialog>
           </div>
-        </Link>
+        )}
       </div>
       {/* mobile screen  */}
       <div className="block md:hidden py-3">
@@ -133,73 +146,75 @@ const NavBar = () => {
             <Link href="#" onClick={() => setOpenMenu(false)}>
               Home
             </Link>
-            <Link href="#" onClick={() => setOpenMenu(false)}>
+            <Link href="#about" onClick={() => setOpenMenu(false)}>
               Who We Are?
             </Link>
-            <Link href="#contact" onClick={() => setOpenMenu(false)}>
+            <Link href="#service" onClick={() => setOpenMenu(false)}>
               Service
             </Link>
-            <Link href="#contact" onClick={() => setOpenMenu(false)}>
-              Service
-            </Link>
-            <Link href="#contact" onClick={() => setOpenMenu(false)}>
+            <Link href="#success" onClick={() => setOpenMenu(false)}>
               Success Stories
             </Link>
             <Link href="#contact" onClick={() => setOpenMenu(false)}>
               Let's Connect
             </Link>
-            <Link href="#" onClick={() => setOpenMenu(false)}>
-              <div>
-                <div>
-                  <Dialog>
-                    <DialogTrigger className="cursor-pointer">
-                      Login/Register
-                    </DialogTrigger>
-                    <DialogContent className="">
-                      <DialogHeader>
-                        <DialogTitle>
-                          <Tabs defaultValue="" className="w-full">
-                            <TabsList className="text-[#5c2653] cursor-pointer  ml-32 md:ml-52">
-                              <TabsTrigger
-                                value="login"
-                                className="cursor-pointer"
-                              >
-                                Login
-                              </TabsTrigger>
-                              <TabsTrigger
-                                value="register"
-                                className="cursor-pointer"
-                              >
-                                Register
-                              </TabsTrigger>
-                            </TabsList>
-                            <TabsContent value="login">
-                              <Login />
-                            </TabsContent>
-                            <TabsContent value="register">
-                              <Register />
-                            </TabsContent>
-                          </Tabs>
-                        </DialogTitle>
-                      </DialogHeader>
-                    </DialogContent>
-                  </Dialog>
-                </div>
+            {isLoggedIn ? (
+              <div
+                className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded cursor-pointer"
+                onClick={handleLogout}
+              >
+                Logout
               </div>
-            </Link>
+            ) : (
+              <div className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded">
+                <Dialog>
+                  <DialogTrigger className="cursor-pointer">
+                    Login/Register
+                  </DialogTrigger>
+                  <DialogContent className="">
+                    <DialogHeader>
+                      <DialogTitle>
+                        <Tabs defaultValue="" className="w-full">
+                          <TabsList className="text-[#5c2653] cursor-pointer  ml-32 md:ml-52">
+                            <TabsTrigger
+                              value="login"
+                              className="cursor-pointer"
+                            >
+                              Login
+                            </TabsTrigger>
+                            <TabsTrigger
+                              value="register"
+                              className="cursor-pointer"
+                            >
+                              Register
+                            </TabsTrigger>
+                          </TabsList>
+                          <TabsContent value="login">
+                            <Login />
+                          </TabsContent>
+                          <TabsContent value="register">
+                            <Register />
+                          </TabsContent>
+                        </Tabs>
+                      </DialogTitle>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            )}
             {/* Button */}
             <div className="">
               <Dialog>
-                <DialogTrigger className="text-xl font-semibold bg-[#99408b] hover:bg-[#8a3a7d] text-gray-50 p-2 cursor-pointer rounded-lg">
+                <DialogTrigger className="text-lg font-semibold bg-[#99408b] hover:bg-[#8a3a7d] text-gray-50 p-2 cursor-pointer rounded-lg">
                   Book An Appointment
                 </DialogTrigger>
                 <DialogContent className="w-full md:w-[50%] max-h-[98%] lg:max-h-[90%] overflow-auto bg-white border-none space-y-6">
                   <DialogHeader>
-                    <DialogTitle className="text-center font-bold text-xl md:text-2xl text-[#99408b]">
-                      Book Your Appointment
+                    <DialogTitle className="text-center font-bold text-lg md:text-2xl text-[#99408b]">
+                      {!isLoggedIn ? "Please Login" : "Book Your  Appointment"}
                     </DialogTitle>
                   </DialogHeader>
-                  <AppointmentForm />
+                  {!isLoggedIn ? <Login /> : <AppointmentForm />}
                 </DialogContent>
               </Dialog>
             </div>

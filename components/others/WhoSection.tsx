@@ -1,10 +1,13 @@
 "use client";
 import { about } from "@/constants";
+import { useGetWhoSectionQuery } from "@/store/apiSlice";
 import Image from "next/image";
 import { useState } from "react";
 
 const WhoSection = () => {
-  const [open, setOpen] = useState(false);
+  const{data:whoWeAre}=useGetWhoSectionQuery()
+  console.log("first",whoWeAre)
+  const [open, setOpen] = useState(false);  
   return (
     <div className="py-4 px-4 sm:px-8 md:px-12 lg:px-16" id="about">
       <h1 className="text-2xl lg:text-3xl text-[#361631] font-bold text-center">
@@ -13,37 +16,43 @@ const WhoSection = () => {
       {/* Business Story */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 items-center py-6 gap-5">
         {/* First Section */}
-        <div className="space-y-3">
-          <p className="hidden lg:block text-lg text-gray-700 text-justify">
-            {about}
-          </p>
-          <p className="lg:hidden text-lg text-gray-700 text-justify max-w-2xl">
-            {open ? about : about.slice(0, 320)}
-            <button
-              className="sm:ps-2 font-semibold underline cursor-pointer underline-offset-4"
-              onClick={() => setOpen((prev) => !prev)}
-            >
-              {open ? "Read Less" : "Read More"}
-            </button>
-          </p>
-          <h1>
-            <span className="text-xl text-[#5c2653] font-bold">
-              Mission Statement :
-            </span>
-            <span className="text-lg"> आफनो लागी साधना अरु को लागी सेवा.</span>
-          </h1>
-        </div>
+        {whoWeAre?.data.map((who)=>(
+             <div className="space-y-3" key={who.id}>
+             <p className="hidden lg:block text-lg text-gray-700 text-justify">
+               {who?.story}
+             </p>
+             <p className="lg:hidden text-lg text-gray-700 text-justify max-w-2xl">
+               {open ? about : about.slice(0, 320)}
+               <button
+                 className="sm:ps-2 font-semibold underline cursor-pointer underline-offset-4"
+                 onClick={() => setOpen((prev) => !prev)}
+               >
+                 {open ? "Read Less" : "Read More"}
+               </button>
+             </p>
+             <h1>
+               <span className="text-xl text-[#5c2653] font-bold">
+                 Mission Statement :
+               </span>
+               <span className="text-lg">{who?.missionStatement}</span>
+             </h1>
+           </div>
+        ))}
+       
         {/* Second Section */}
-        <div className="w-full">
+        {whoWeAre?.data.map((who)=>(
+          <div className="w-full" key={who.id}>
           <Image
-            src="/who.jpg"
-            alt="Image"
+            src={who ? who?.image : ""}
+            alt="Who We Are"
             width={0}
             height={0}
             sizes="100vw"
             className="w-full h-72 sm:h-80 object-cover rounded-md"
           />
         </div>
+        ))}
+        
       </div>
       {/* Background Story */}
       <div className="flex flex-col-reverse md:flex-row justify-center items-center gap-5 py-6">
