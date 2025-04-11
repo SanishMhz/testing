@@ -191,14 +191,4 @@ export const BookList = [
   }
 ];
 
-export const timePeriodList=[
-  {
-    time:"30"
-  },
-  {
-    time:"60"
-  },
-  {
-    time:"90"
-  }
-]
+export const timePeriods=["30","60","90"];

@@ -2,18 +2,12 @@
 import React from "react";
 import WhyChooseCard from "../shared/WhyChooseCard";
 import { useGetChooseUsQuery } from "@/store/apiSlice";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 
 
 const Why = () => {
-  const {data:choose,isLoading}=useGetChooseUsQuery();
-  if(isLoading){
-    return <DotLottieReact
-    src="path/to/animation.lottie"
-    loop
-    autoplay
-  />
-  }
+  const {data:choose}=useGetChooseUsQuery();
+ 
   return (
     <div className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-8 md:px-12 lg:px-16 py-10">
       <h1 className="text-[#361631] text-xl sm:text-2xl lg:text-3xl font-bold text-center">

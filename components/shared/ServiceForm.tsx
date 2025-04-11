@@ -1,4 +1,3 @@
-
 "use client";
 import {
   Form,
@@ -12,55 +11,67 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "../ui/button";
-import { useGetSericesByIdQuery } from "@/store/apiSlice";
+import {
+  useGetSericesByIdQuery,
+  useSubmitBookingMutation,
+} from "@/store/apiSlice";
 import { useParams } from "next/navigation";
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { timePeriods } from "@/constants";
+import { useGetUserProfileQuery } from "@/store/userApi";
+import { useDispatch } from "react-redux";
+import { removeUser } from "@/store/userSlice";
+import toast from "react-hot-toast";
 
 const ServiceForm = () => {
-    const params=useParams();
-    const id=params?.id;
-  const {data:service}=useGetSericesByIdQuery(Number(id))
-
+  const token = localStorage.getItem("user");
+  const [bookSubmit] = useSubmitBookingMutation();
+  const { data: user } = useGetUserProfileQuery(token ? JSON.parse(token) : "");
+  const params = useParams();
+  const id = params?.id;
+  const { data: service } = useGetSericesByIdQuery(Number(id));
+  const dispatch = useDispatch();
   const bookingFormSchema = z.object({
-    firstName: z
-      .string()
-      .min(5, "First name must be at least 5 characters")
-      .max(50),
-    lastName: z
-      .string()
-      .min(5, "Last name must be at least 5 characters")
-      .max(50),
-    contact: z
-      .string()
-      .length(10, "Contact must be exactly 10 digits")
-      .regex(/^\d+$/, "Contact must contain only numbers"),
-    email: z
-      .string()
-      .min(8, { message: "Email must be at least 8 characters." })
-      .email({ message: "Invalid email address" })
-      .trim(),
+    name: z.string(),
+    contact: z.string(),
+    email: z.string(),
     service: z.string().trim(),
-    description: z
-      .string()
-      .min(50, { message: "Message should be at least 50 characters." })
-      .max(500, { message: "Message should not exceed 500 characters." }),
+    time_period: z.string().trim(),
   });
   const form = useForm<z.infer<typeof bookingFormSchema>>({
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
       contact: "",
       email: "",
       service: "",
-      description: "",
+      time_period: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof bookingFormSchema>) {
+  async function onSubmit(values: z.infer<typeof bookingFormSchema>) {
     console.log(values);
+    if (!token) {
+      dispatch(removeUser());
+    }
+    try {
+      await bookSubmit({
+        services: [service ? service.id : 0],
+        token: token ? JSON.parse(token) : "",
+        time_period: values.time_period,
+      });
+      toast.success("Booking Succesfull");
+      form.reset();
+    } catch (error) {
+      toast.error("Please Try Again");
+    }
   }
 
   return (
@@ -72,25 +83,13 @@ const ServiceForm = () => {
         >
           <FormField
             control={form.control}
-            name="firstName"
+            name="name"
             render={({ field }) => (
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">First Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Harry" {...field} className="w-full" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem className="space-y-1">
-                <FormLabel className="sm:text-lg">Last Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Porter" {...field} className="w-full" />
+                  <Input value={user?.name} className="w-full" readOnly />
+                  
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -103,11 +102,7 @@ const ServiceForm = () => {
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">Contact Number</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="+977 XXXXXXXXXX"
-                    {...field}
-                    className="w-full"
-                  />
+                  <Input value={user?.phone} className="w-full" readOnly />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -120,11 +115,7 @@ const ServiceForm = () => {
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">Email Address</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="eg@gmail.com"
-                    {...field}
-                    className="w-full"
-                  />
+                  <Input value={user?.email} className="w-full" readOnly/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -137,15 +128,44 @@ const ServiceForm = () => {
             name="service"
             render={({ field }) => (
               <FormItem className="sm:col-span-2 space-y-1">
-                <FormLabel className="sm:text-lg">
-                  Book Your Service
-                </FormLabel>
+                <FormLabel className="sm:text-lg">Book Your Service</FormLabel>
                 <FormControl>
-                <Input
-                  value={service?.title || ""}
-                  readOnly
-                  className="w-full bg-gray-100 cursor-not-allowed" 
+                  <Input
+                    value={service?.title || ""}
+                    readOnly
+                    className="w-full bg-gray-100 cursor-not-allowed"
                   />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="time_period"
+            render={({ field }) => (
+              <FormItem className="sm:col-span-2 space-y-1">
+                <FormLabel className="sm:text-lg">Time Period</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full border-gray-500">
+                      <SelectValue placeholder="Select Time Period" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white overflow-auto">
+                      {timePeriods.map((item,index) => (
+                        <SelectItem
+                          value={item}
+                          key={index}
+                          className="text-gray-950"
+                        >
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -153,23 +173,7 @@ const ServiceForm = () => {
           />
 
           {/* Text Area for Message and Enquiry */}
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem className="sm:col-span-2 space-y-1">
-                <FormLabel className="sm:text-lg">Message or Enquiry</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Type your message here."
-                    {...field}
-                    className="w-full h-40"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
           {/* Submit Button */}
           <div className="sm:col-span-2 py-4">
             <Button

@@ -17,5 +17,5 @@ export const getUserFromLocal = (): User | null=> {
 
 
 export const removeUserFromLocal = (): void => {
-  localStorage.removeItem('user'); // It's better to just remove the 'user' item
+  localStorage.removeItem('user'); 
 };

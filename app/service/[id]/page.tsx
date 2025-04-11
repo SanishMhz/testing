@@ -16,25 +16,25 @@ import {
 } from "@/components/ui/dialog";
 import { Login } from "@/components/others/Login";
 import ServiceForm from "@/components/shared/ServiceForm";
- export interface ServiceData{
-  id:string,
-  created_at:number,
-  image:string,
-  updated_at:number,
-  title:string,
-  description:string,
-  includes:string,
-  price:number
+export interface ServiceData {
+  id: string;
+  created_at: number;
+  image: string;
+  updated_at: number;
+  title: string;
+  description: string;
+  includes: string;
+  price: number;
 }
 
 const ServicePage = () => {
-  const params=useParams();
-  const id=params?.id;
+  const params = useParams();
+  const id = params?.id;
 
   const router = useRouter();
-  const {data:service}=useGetSericesByIdQuery(Number(id))
-  const {data:otherService}=useGetServicesQuery()
-  const {user}=useSelector((state:RootState)=>state.userSlice)
+  const { data: service } = useGetSericesByIdQuery(Number(id));
+  const { data: otherService } = useGetServicesQuery();
+  const { user } = useSelector((state: RootState) => state.userSlice);
   return (
     <div className="bg-[#f5ecf3]">
       {/* Home Button */}
@@ -58,23 +58,20 @@ const ServicePage = () => {
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             {service?.title}
           </h1>
-          <p className="text-xl sm:text-2xl">
-            {service?.description}
-          </p>
+          <p className="text-xl sm:text-2xl">{service?.description}</p>
           <Dialog>
-          <DialogTrigger className="text-lg font-semibold bg-[#99408b] hover:bg-[#8a3a7d] text-gray-50 p-2 cursor-pointer rounded-lg">
-            Book An Appointment
-          </DialogTrigger>
-          <DialogContent className="w-full md:w-[50%] max-h-[98%] lg:max-h-[90%] overflow-auto bg-white border-none space-y-6">
-            <DialogHeader>
-              <DialogTitle className="text-center font-bold text-lg md:text-2xl text-[#99408b]">
-                {!user ? "Please Login": "Book Your  Appointment"}
-              </DialogTitle>
-            </DialogHeader>
-            {!user ? <Login/> :  <ServiceForm /> }
-          </DialogContent>
-         
-        </Dialog>
+            <DialogTrigger className="text-lg font-semibold bg-[#99408b] hover:bg-[#8a3a7d] text-gray-50 p-2 cursor-pointer rounded-lg">
+              Book An Appointment
+            </DialogTrigger>
+            <DialogContent className="w-full md:w-[50%] max-h-[98%] lg:max-h-[90%] overflow-auto bg-white border-none space-y-6">
+              <DialogHeader>
+                <DialogTitle className="text-center font-bold text-lg md:text-2xl text-[#99408b]">
+                  {!user ? "Please Login" : "Book Your  Appointment"}
+                </DialogTitle>
+              </DialogHeader>
+              {!user ? <Login /> : <ServiceForm />}
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 
@@ -82,26 +79,30 @@ const ServicePage = () => {
       <div className="py-6">
         <div className="flex flex-col md:flex-row justify-center gap-5 px-5 md:px-20">
           <div className="flex-1 w-full space-y-3">
-            <Image
-               src={service?.image || ""}
-               alt={service?.title || ""} 
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-full h-96 rounded-2xl object-cover"
-            />
+            {service?.image && (
+              <Image
+                src={service?.image}
+                alt={service?.title}
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-full h-96 rounded-2xl object-cover"
+              />
+            )}
+
             <div className="text-justify text-lg text-gray-600">
-              <p>
-                {service?.description}
-              </p>
+              <p>{service?.description}</p>
 
               {/* What's Included Section */}
               <div className="space-y-2 mt-6">
                 <h1 className="font-bold text-xl">What's Included?</h1>
                 <ul className="space-y-3">
-                    <li className="flex items-center gap-2">
-                      <div className="text-base" dangerouslySetInnerHTML={{ __html: service?.includes }} />
-                    </li>
+                  <li className="flex items-center gap-2">
+                    <div
+                      className="text-base"
+                      dangerouslySetInnerHTML={{ __html: service?.includes }}
+                    />
+                  </li>
                 </ul>
               </div>
 
@@ -109,7 +110,10 @@ const ServicePage = () => {
               <div className="mt-6">
                 <h1 className="text-xl font-bold">Pricing</h1>
                 <p className="flex items-center gap-2">
-                  <IoIosPricetag size={20} />Rs.{service?.price}
+                  <IoIosPricetag size={20} />
+                  {service?.price30 ? `NPR.${service?.price30}(30 min)|` : ""}
+                  {service?.price60 ? `NPR.${service?.price60} (60 min)|` : ""}
+                  {service?.price90 ? `NPR.${service?.price90}(90 min)` : ""}
                 </p>
               </div>
             </div>

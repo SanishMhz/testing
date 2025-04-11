@@ -7,31 +7,33 @@ import { IoMail } from "react-icons/io5";
 import { MdCopyright } from "react-icons/md";
 import GetInTouchForm from "../others/GetInTouchForm";
 
+
 const Footer = () => {
+ 
   const quickLinks = [
     {
       label: "Home",
-      href: "#",
+      href: "#home",
     },
     {
       label: "Who we are?",
-      href: "#",
+      href: "#about",
     },
     {
       label: "Services",
-      href: "#",
+      href: "#service",
     },
     {
       label: "Success Stories",
-      href: "#",
+      href: "#success",
     },
     {
       label: "Lets Connect",
-      href: "#",
+      href: "#contact",
     },
     {
       label: "Trainings",
-      href: "#",
+      href: "#training",
     },
   ];
   const services = [
@@ -77,10 +79,10 @@ const Footer = () => {
             your journey toward inner harmony.
           </p>
           <div className="flex gap-4 items-center">
-            <Link href="#">
+            <Link href="https://www.facebook.com/p/Vedic-Healing-Center-100083107520028/" target="_blank">
               <FaFacebook size={20} />
             </Link>
-            <Link href="#">
+            <Link href="">
               <BsInstagram size={20} />
             </Link>
             <Link href="#">

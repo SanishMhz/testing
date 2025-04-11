@@ -28,7 +28,9 @@ type ServiceData={
     title:string,
     description:string,
     includes:string,
-    price:number
+    price30:number,
+    price60:number,
+    price90:number
 }
 
 type TrainingResponse={
@@ -136,9 +138,10 @@ type ContactRequest={
   first_name:string,
   last_name:string,
   phone:string,
-  email:string,
-  message:string
+  email?:string,
+  message:string,
 }
+
 
 type LoginRequest={
   email:string,
@@ -164,10 +167,9 @@ type Register={
  
 
 type BookRequest={
-  service:string[],
-  time_period:string,
-  total:number,
-  token:string
+  services:number[],
+  token:string,
+  time_period:string;
 }
 type Book={
   message:String
@@ -179,4 +181,20 @@ type UserResponse={
   name:string;
   phone:string;
   location:string;
+}
+
+type SocialResponse={
+  total_data:number,
+  next:number | null,
+  previouse:number | null
+  data:PrimaryData[]
+}
+
+type SocialData={
+  id:number,
+  created_at:string,
+  updater_at:string,
+  facebook:String,
+  instagram:string,
+  tiktok:string
 }

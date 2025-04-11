@@ -1,14 +1,16 @@
 "use client";
-import { serviceList } from "@/constants";
 import React from "react";
 import ServiceCard from "../shared/ServiceCard";
 import { useGetServicesQuery } from "@/store/apiSlice";
 
 const Services = () => {
-  const {data:services}=useGetServicesQuery();
-  console.log(services)
+  const { data: services } = useGetServicesQuery();
+
   return (
-    <div className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-8 md:px-12 lg:px-16 py-6" id="service">
+    <div
+      className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-8 md:px-12 lg:px-16 py-6"
+      id="service"
+    >
       <div className="flex flex-col gap-4">
         <h1 className="text-[#361631] text-xl sm:text-2xl lg:text-3xl font-bold text-center">
           OUR SERVICES
@@ -28,7 +30,6 @@ const Services = () => {
             image={service.image}
             title={service.title}
             key={service.id}
-
           />
         ))}
       </div>

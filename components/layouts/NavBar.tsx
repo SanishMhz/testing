@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { RiMenuFill } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";

@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -11,22 +10,15 @@ import {
 } from "@/components/ui/carousel";
 import { FaQuoteLeft } from "react-icons/fa";
 import { useGetSuccessApiQuery } from "@/store/apiSlice";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+
 
 const Testimonials = () => {
-  const {data:success,isLoading}=useGetSuccessApiQuery()
+  const {data:success}=useGetSuccessApiQuery()
   
   const plugin = React.useRef(
     Autoplay({ delay: 2500, stopOnInteraction: true })
   );
-  ////
-  if(isLoading){
-    return <DotLottieReact
-    src="path/to/animation.lottie"
-    loop
-    autoplay
-  />
-  }
+  
   return (
     <div className="px-4 sm:px-8 md:px-12 lg:px-16 py-10 flex flex-col gap-6 sm:gap-8" id="success">
       <h1 className="text-[#361631] text-xl sm:text-2xl lg:text-3xl font-bold text-center">

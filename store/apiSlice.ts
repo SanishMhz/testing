@@ -131,13 +131,12 @@ export const contactApi = createApi({
         },
       }),
     }),
-
     getPrimaryContact:builder.query<PrimaryResponse,void>({
       query:()=>({
         url:"primarycontact/",
         method:"GET"
       })
-    })
+    }),
   }),
 });
 
@@ -150,7 +149,7 @@ export const bookApi=createApi({
   baseQuery,
   endpoints:(builder)=>({
     submitBooking:builder.mutation<Book,BookRequest>({
-      query:(data)=>({
+      query:({token,...data})=>({
         url:"booking/",
         method:"POST",
         body:data,
@@ -164,5 +163,22 @@ export const bookApi=createApi({
 })
 
 export const {useSubmitBookingMutation}=bookApi;
+
+// Social Media Link
+
+export const socialApi=createApi({
+  reducerPath:"socialApi",
+  baseQuery,
+  endpoints:(builder)=>({
+    getSocialLink:builder.query<SocialData,string>({
+      query:()=>({
+        url:"sociallink/",
+        method:"GET"
+      })
+    })
+  })
+})
+
+export const {useGetSocialLinkQuery}=socialApi
 
 

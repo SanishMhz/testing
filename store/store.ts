@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { bookApi, chooseApi,contactApi,homeApi,serviceApi, successApi, trainApi, whoApi } from "./apiSlice";
+import { bookApi, chooseApi,contactApi,homeApi,serviceApi, socialApi, successApi, trainApi, whoApi } from "./apiSlice";
 import { userSlice } from "./userSlice";
 import { getUserApi, loginApi, registerApi } from "./userApi";
 
@@ -16,7 +16,8 @@ export const store = configureStore({
     [loginApi.reducerPath]:loginApi.reducer,
     [registerApi.reducerPath]:registerApi.reducer,
     [bookApi.reducerPath]:bookApi.reducer,
-    [getUserApi.reducerPath]:getUserApi.reducer
+    [getUserApi.reducerPath]:getUserApi.reducer,
+    [socialApi.reducerPath]:socialApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -30,7 +31,8 @@ export const store = configureStore({
       loginApi.middleware,
       registerApi.middleware,
       bookApi.middleware,
-      getUserApi.middleware
+      getUserApi.middleware,
+      socialApi.middleware
     )
 });
 
