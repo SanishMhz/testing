@@ -27,6 +27,7 @@ const NavBar = () => {
   const handleLogout = () => {
     dispatch(removeUser());
   };
+  //
   return (
     <div className="bg-[#dfc4db] py-3 text-gray-600 relative px-4 sm:px-8 md:px-12 lg:px-16">
       {/* Larger Screen */}
