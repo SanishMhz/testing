@@ -5,16 +5,25 @@ interface User {
   id: string;
   name: string;
   email: string;
+  auth_token:string;
 }
+
+
+interface UserState {
+  user: User | null;
+}
+
+const initialState: UserState = {
+  user: getUserFromLocal(),
+};
+
 export const userSlice=createSlice({
   name:"userSlice",
-  initialState:{
-    user:getUserFromLocal() 
-  },
+  initialState, 
   reducers:{
     addUser:(state,action)=>{
       state.user=action.payload;
-      setUser(state.user)
+      setUser(action.payload)
     },
     removeUser:(state)=>{
       state.user=null;

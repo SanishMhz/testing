@@ -53,7 +53,9 @@ const GetInTouchForm = () => {
     toast.success("Thank You For get in touch with us.")
     form.reset()
    } catch (error) {
+    console.log(error)
     toast.error("Something went wrong.Please Try Again!!")
+    
    }
   }
   return (

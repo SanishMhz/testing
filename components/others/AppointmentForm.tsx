@@ -80,6 +80,7 @@ const AppointmentForm = () => {
       toast.success("Booking Succesfull");
       form.reset();
     } catch (error) {
+      console.log(error);
       toast.error("Please Try Again");
     }
   }
@@ -94,7 +95,7 @@ const AppointmentForm = () => {
           <FormField
             control={form.control}
             name="name"
-            render={({ field }) => (
+            render={({}) => (
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">First Name</FormLabel>
                 <FormControl>
@@ -107,7 +108,7 @@ const AppointmentForm = () => {
           <FormField
             control={form.control}
             name="contact"
-            render={({ field }) => (
+            render={({}) => (
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">Contact Number</FormLabel>
                 <FormControl>
@@ -124,7 +125,7 @@ const AppointmentForm = () => {
           <FormField
             control={form.control}
             name="email"
-            render={({ field }) => (
+            render={({}) => (
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">Email Address</FormLabel>
                 <FormControl>
@@ -245,32 +246,6 @@ export default AppointmentForm;
 //   FormMessage,
 // } from "@/components/ui/form"
 
-const items = [
-  {
-    id: "recents",
-    label: "Recents",
-  },
-  {
-    id: "home",
-    label: "Home",
-  },
-  {
-    id: "applications",
-    label: "Applications",
-  },
-  {
-    id: "desktop",
-    label: "Desktop",
-  },
-  {
-    id: "downloads",
-    label: "Downloads",
-  },
-  {
-    id: "documents",
-    label: "Documents",
-  },
-] as const;
 
 // const FormSchema = z.object({
 

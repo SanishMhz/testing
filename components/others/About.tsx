@@ -5,8 +5,6 @@ import { useGetHomeSectionQuery } from "@/store/apiSlice";
 
 const About = () => {
   const {data:home}=useGetHomeSectionQuery();
-
-
   return (
     <div id="home">
       {home?.data.map((home)=>(
@@ -32,8 +30,8 @@ const About = () => {
             </p>
             <div className="px-4">
               <Button className="text-base lg:text-xl flex flex-col gap-0 text-justify bg-[#99408b] font-semibold hover:bg-[#5c2653] text-gray-50 lg:mx-0 py-8 lg:py-10 cursor-pointer rounded-md md:w-fit">
-                <span>"Book Your Healing Session Today – Restore</span>
-                <span>Balance, Reduce Stress, and Feel Rejuvenated"</span>
+                <span>&quot;Book Your Healing Session Today – Restore</span>
+                <span>Balance, Reduce Stress, and Feel Rejuvenated&quot;</span>
               </Button>
             </div>
           </div>

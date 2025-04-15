@@ -95,15 +95,17 @@ const ServicePage = () => {
 
               {/* What's Included Section */}
               <div className="space-y-2 mt-6">
-                <h1 className="font-bold text-xl">What's Included?</h1>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-2">
-                    <div
-                      className="text-base"
-                      dangerouslySetInnerHTML={{ __html: service?.includes }}
-                    />
-                  </li>
-                </ul>
+                <h1 className="font-bold text-xl">What&apos;s Included?</h1>
+                {service && service.includes && (
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-2">
+                      <div
+                        className="text-base"
+                        dangerouslySetInnerHTML={{ __html: service.includes }}
+                      />
+                    </li>
+                  </ul>
+                )}
               </div>
 
               {/* Pricing */}

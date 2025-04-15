@@ -59,7 +59,7 @@ const NavBar = () => {
           href={"#connect"}
           className="hover:bg-[#733068] hover:text-gray-50 px-4 py-1 rounded"
         >
-          Let's Connect
+          Let&apos;s Connect
         </Link>
         {isLoggedIn ? (
           <div
@@ -156,7 +156,7 @@ const NavBar = () => {
               Success Stories
             </Link>
             <Link href="#contact" onClick={() => setOpenMenu(false)}>
-              Let's Connect
+              Let&apos;s Connect
             </Link>
             {isLoggedIn ? (
               <div

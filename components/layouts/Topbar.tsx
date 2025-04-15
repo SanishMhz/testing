@@ -11,13 +11,11 @@ import {
 import AppointmentForm from "../others/AppointmentForm";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { useRouter } from "next/navigation";
+
 import { Login } from "../others/Login";
 
 const Topbar = () => {
   const { user } = useSelector((state: RootState) => state.userSlice);
-  const router = useRouter();
-
   return (
     <div className="hidden md:flex justify-between items-center py-5 px-4 sm:px-8 md:px-12 lg:px-16 bg-[#f5ecf3]">
       <div className="flex items-center gap-2">
