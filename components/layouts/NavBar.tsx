@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import {useState } from "react";
+import { useState } from "react";
 import { RiMenuFill } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
@@ -21,8 +21,8 @@ import { removeUser } from "@/store/userSlice";
 
 const NavBar = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const {user}=useSelector((state:RootState)=>state.userSlice)
-  const isLoggedIn=user!==null;
+  const { user } = useSelector((state: RootState) => state.userSlice);
+  const isLoggedIn = user !== null;
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(removeUser());
