@@ -52,7 +52,7 @@ const ContactUs = () => {
 
   const onSubmit = async (values: z.infer<typeof contactFormSchema>) => {
     try {
-      const response=await submitContact({
+      await submitContact({
         first_name:values.first_name,
         last_name:values.last_name,
         phone:values.phone,
@@ -63,6 +63,7 @@ const ContactUs = () => {
        form.reset()
     } catch (error) {
       toast.error("Something Went Wrong.Please Try Again!!!")
+      console.log(error)
     }
     
   };

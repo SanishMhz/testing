@@ -7,6 +7,7 @@ import { useGetChooseUsQuery } from "@/store/apiSlice";
 
 const Why = () => {
   const {data:choose}=useGetChooseUsQuery();
+  console.log("Why data:",choose)
  
   return (
     <div className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-8 md:px-12 lg:px-16 py-10">

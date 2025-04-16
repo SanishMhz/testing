@@ -70,6 +70,7 @@ const ServiceForm = () => {
       toast.success("Booking Succesfull");
       form.reset();
     } catch (error) {
+      console.log(error)
       toast.error("Please Try Again");
     }
   }
@@ -84,7 +85,7 @@ const ServiceForm = () => {
           <FormField
             control={form.control}
             name="name"
-            render={({ field }) => (
+            render={() => (
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">First Name</FormLabel>
                 <FormControl>
@@ -98,7 +99,7 @@ const ServiceForm = () => {
           <FormField
             control={form.control}
             name="contact"
-            render={({ field }) => (
+            render={() => (
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">Contact Number</FormLabel>
                 <FormControl>
@@ -111,7 +112,7 @@ const ServiceForm = () => {
           <FormField
             control={form.control}
             name="email"
-            render={({ field }) => (
+            render={() => (
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">Email Address</FormLabel>
                 <FormControl>
@@ -126,7 +127,7 @@ const ServiceForm = () => {
           <FormField
             control={form.control}
             name="service"
-            render={({ field }) => (
+            render={() => (
               <FormItem className="sm:col-span-2 space-y-1">
                 <FormLabel className="sm:text-lg">Book Your Service</FormLabel>
                 <FormControl>

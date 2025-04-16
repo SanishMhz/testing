@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useRegisterUserMutation } from "@/store/userApi";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 // Password validation schema
 const passwordSchema = z
@@ -54,8 +53,6 @@ export function Register() {
   const [showPass, setShowPass] = useState(false);
   const [confirmPass, setConfirmPass] = useState(false);
   const [registerUser, { isLoading }] = useRegisterUserMutation();
-  const router = useRouter();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -84,6 +81,7 @@ export function Register() {
       
       form.reset();
     } catch (error) {
+      console.log(error)
       toast.error("Something went wrong. Please try again!");
     }
   }

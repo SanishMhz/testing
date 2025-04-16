@@ -19,7 +19,6 @@ import { useState } from "react";
 import { useLoginUserMutation } from "@/store/userApi";
 import { useDispatch } from "react-redux";
 import { addUser } from "@/store/userSlice";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const passwordSchema = z
@@ -46,9 +45,9 @@ const formSchema = z.object({
 
 export function Login() {
   const [showPass, setShowPass] = useState<boolean | undefined>(false);
-  const [loginUser, { isLoading }] = useLoginUserMutation();
+  const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
-  const router = useRouter();
+ 
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,6 +62,7 @@ export function Login() {
       dispatch(addUser(res.auth_token));
       toast.success("Login successfull");
     } catch (error) {
+      console.log(error)
       toast.error("User Not Found.Please Try Again!");
     }
   }
