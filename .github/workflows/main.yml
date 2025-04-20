@@ -1,0 +1,48 @@
+name: Vedic Frontend CI-CD
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+      
+# Build job
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install dependencies
+        run: npm ci
+      - name: Application Build
+        run: npm run build
+      - name: Compress dependencies
+        run: tar -cvzf bundle.tar.gz node_modules .next
+        
+# Deployment job
+      - name: Copy tar files to Deployment server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: bundle.tar.gz
+          target: /var/www/html/vedic-healing/Vedic-healing---frontend/
+      - name: Extract tar files on Deployment server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            export PATH=$PATH:/root/.nvm/versions/node/v22.14.0/bin
+            cd /var/www/html/vedic-healing/Vedic-healing---frontend/
+            tar -xvzf bundle.tar.gz
+            rm bundle.tar.gz
+            pm2 restart ecosystem.config.js
