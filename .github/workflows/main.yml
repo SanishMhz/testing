@@ -1,9 +1,9 @@
 name: Vedic Frontend CI-CD
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
-  workflow_dispatch:
       
 # Build job
 jobs:
