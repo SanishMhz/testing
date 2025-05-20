@@ -41,8 +41,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            export PATH=$PATH:/root/.nvm/versions/node/v22.15.1/bin 
-            export PATH=$PATH:/var/www/html/vedic-healing/Vedic-healing---frontend/node_modules/.bin
+            export PATH=$PATH:/root/.nvm/versions/node/v22.14.0/bin
             cd /var/www/html/vedic-healing/Vedic-healing---frontend/
             tar -xvzf bundle.tar.gz
             rm bundle.tar.gz
