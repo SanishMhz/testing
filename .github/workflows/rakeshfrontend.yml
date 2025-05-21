@@ -1,0 +1,61 @@
+name: Frontend CICD for Vedic
+
+on:
+  push:
+    branches:
+      - master
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Clone project repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies and Build
+        env: 
+          NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }} #stored in secrets under setting tab.
+          NEXT_PUBLIC_API_USERBASE_URL: ${{ secrets.NEXT_PUBLIC_API_USERBASE_URL }}
+          NEXT_PUBLIC_API_REGISTERBASE_URL: ${{ secrets.NEXT_PUBLIC_API_REGISTERBASE_URL }}
+        run: |
+          npm ci
+          npm run build
+
+      - name: Reducing size with xz compression
+        run: tar -cJf deploy.tar.xz .next node_modules package.json package-lock.json
+
+      - name: Upload build files to server with SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with: 
+          host: ${{ secrets.HOST }} #stored in secrets under setting tab.
+          username: ${{ secrets.USERNAME }} #stored in secrets under setting tab.
+          key: ${{ secrets.KEY }} #stored in secrets under setting tab.
+          port: ${{ secrets.PORT }} #stored in secrets under setting tab.
+          local_path: deploy.tar.xz
+          remote_path: /var/www/html/rakesh/vedic/Vedic-healing---frontend/
+      
+      - name: Restart App on server
+        uses: appleboy/ssh-action@v1.0.3
+        with: 
+          host: ${{ secrets.HOST }} #stored in secrets under setting tab.
+          username: ${{ secrets.USERNAME }} #stored in secrets under setting tab.
+          key: ${{ secrets.KEY }} #stored in secrets under setting tab.
+          port: ${{ secrets.PORT }} #stored in secrets under setting tab.
+          script: |
+            cd /var/www/html/rakesh/vedic/Vedic-healing---frontend/
+
+            # Extract and clean up
+            tar -xJf deploy.tar.xz
+            rm deploy.tar.xz
+            
+            export PATH=$PATH:/root/.nvm/versions/node/v22.14.0/bin
+
+            if command -v npx &> /dev/null; then
+              npx pm2 reload ecosystem.config.js
+            else
+              echo "npx not found"
+              exit 1
+            fi
+               
+            
