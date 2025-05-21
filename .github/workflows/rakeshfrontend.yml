@@ -28,9 +28,9 @@ jobs:
       - name: Upload build files to server with SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with: 
-          host: ${{ secrets.HOST }} #stored in secrets under setting tab.
+          server: ${{ secrets.HOST }} #stored in secrets under setting tab.
           username: ${{ secrets.USERNAME }} #stored in secrets under setting tab.
-          key: ${{ secrets.KEY }} #stored in secrets under setting tab.
+          ssh_private_key: ${{ secrets.KEY }} #stored in secrets under setting tab.
           port: ${{ secrets.PORT }} #stored in secrets under setting tab.
           local_path: deploy.tar.xz
           remote_path: /var/www/html/rakesh/vedic/Vedic-healing---frontend/
