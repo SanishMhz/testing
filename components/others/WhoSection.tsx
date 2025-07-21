@@ -15,7 +15,7 @@ const WhoSection = () => {
       {/* Business Story */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 items-center py-6 gap-5">
         {/* First Section */}
-        {whoWeAre?.data.map((who) => (
+        {whoWeAre?.data.map((who: WhoSectionData) => (
           <div className="space-y-3" key={who.id}>
             <p className="hidden lg:block text-lg text-gray-700 text-justify">
               {who?.story}
@@ -39,7 +39,7 @@ const WhoSection = () => {
         ))}
 
         {/* Second Section */}
-        {whoWeAre?.data.map((who) => (
+        {whoWeAre?.data.map((who: WhoSectionData) => (
           <div className="w-full" key={who.id}>
             <Image
               src={who ? who?.image : ""}

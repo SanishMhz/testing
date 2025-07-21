@@ -1,14 +1,17 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useGetHomeSectionQuery } from "@/store/apiSlice";
 
 const About = () => {
-  const {data:home}=useGetHomeSectionQuery();
+  const { data: home } = useGetHomeSectionQuery();
   return (
     <div id="home">
-      {home?.data.map((home)=>(
-          <div className="flex flex-col-reverse md:flex-row justify-center items-center gap-5 px-4 sm:px-8 md:px-12 lg:px-28 py-5 md:py-8" key={home.id}>
+      {home?.data.map((home: HomeData) => (
+        <div
+          className="flex flex-col-reverse md:flex-row justify-center items-center gap-5 px-4 sm:px-8 md:px-12 lg:px-28 py-5 md:py-8"
+          key={home.id}
+        >
           {/* First Section */}
           <div className="">
             <Image
@@ -37,9 +40,7 @@ const About = () => {
           </div>
         </div>
       ))}
-       
     </div>
- 
   );
 };
 export default About;

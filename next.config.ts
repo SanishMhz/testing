@@ -8,9 +8,13 @@ const nextConfig: NextConfig = {
         protocol: "https",
       },
       {
-        hostname:"82.29.161.226",
-        protocol:"http"
-      }
+        hostname: "82.29.161.226",
+        protocol: "http",
+      },
+      {
+        hostname: "admin.vedichealing.com.np",
+        protocol: "https",
+      },
     ],
   },
   webpack(config, { isServer }) {

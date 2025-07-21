@@ -32,6 +32,7 @@ import { removeUser } from "@/store/userSlice";
 import { useGetUserProfileQuery } from "@/store/userApi";
 import toast from "react-hot-toast";
 
+type ServiceTitle = { id: number; title: string };
 const AppointmentForm = () => {
   const token = localStorage.getItem("user");
   const [bookSubmit] = useSubmitBookingMutation();
@@ -39,10 +40,12 @@ const AppointmentForm = () => {
   const dispatch = useDispatch();
   const { data: service } = useGetServicesQuery();
 
-  const serviceTitleList = service?.data.map((item) => ({
-    id: item.id,
-    title: item.title,
-  }));
+  const serviceTitleList: ServiceTitle[] | undefined = service?.data.map(
+    (item: ServiceData) => ({
+      id: item.id,
+      title: item.title,
+    })
+  );
   console.log(serviceTitleList);
   const bookingFormSchema = z.object({
     name: z.string(),
@@ -151,12 +154,12 @@ const AppointmentForm = () => {
                     You can select one or more services
                   </FormDescription>
                 </div>
-                {serviceTitleList?.map((item) => (
+                {serviceTitleList?.map((item: ServiceTitle) => (
                   <FormItem key={item.id} className="flex items-center gap-2">
                     <FormControl>
                       <Checkbox
                         checked={field.value?.includes(item.id)}
-                        onCheckedChange={(checked) => {
+                        onCheckedChange={(checked: boolean) => {
                           if (checked) {
                             field.onChange([...field.value, item.id]);
                           } else {
@@ -226,103 +229,3 @@ const AppointmentForm = () => {
 };
 
 export default AppointmentForm;
-
-// "use client"
-
-// import { zodResolver } from "@hookform/resolvers/zod"
-// import { useForm } from "react-hook-form"
-// import { z } from "zod"
-
-// import { toast } from "@/components/hooks/use-toast"
-// import { Button } from "@/components/ui/button"
-// import { Checkbox } from "@/components/ui/checkbox"
-// import {
-//   Form,
-//   FormControl,
-//   FormDescription,
-//   FormField,
-//   FormItem,
-//   FormLabel,
-//   FormMessage,
-// } from "@/components/ui/form"
-
-
-// const FormSchema = z.object({
-
-// })
-
-// export function CheckboxReactHookFormMultiple() {
-//   const form = useForm<z.infer<typeof FormSchema>>({
-//     resolver: zodResolver(FormSchema),
-//     defaultValues: {
-//       items: ["recents", "home"],
-//     },
-//   })
-
-//   function onSubmit(data: z.infer<typeof FormSchema>) {
-//     toast({
-//       title: "You submitted the following values:",
-//       description: (
-//         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-//           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-//         </pre>
-//       ),
-//     })
-//   }
-
-//   return (
-//     <Form {...form}>
-//       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-//         <FormField
-//           control={form.control}
-//           name="items"
-//           render={() => (
-//             <FormItem>
-//               <div className="mb-4">
-//                 <FormLabel className="text-base">Sidebar</FormLabel>
-//                 <FormDescription>
-//                   Select the items you want to display in the sidebar.
-//                 </FormDescription>
-//               </div>
-//               {items.map((item) => (
-//                 <FormField
-//                   key={item.id}
-//                   control={form.control}
-//                   name="items"
-//                   render={({ field }) => {
-//                     return (
-//                       <FormItem
-//                         key={item.id}
-//                         className="flex flex-row items-start space-x-3 space-y-0"
-//                       >
-//                         <FormControl>
-//                           <Checkbox
-//                             checked={field.value?.includes(item.id)}
-//                             onCheckedChange={(checked) => {
-//                               return checked
-//                                 ? field.onChange([...field.value, item.id])
-//                                 : field.onChange(
-//                                     field.value?.filter(
-//                                       (value) => value !== item.id
-//                                     )
-//                                   )
-//                             }}
-//                           />
-//                         </FormControl>
-//                         <FormLabel className="text-sm font-normal">
-//                           {item.label}
-//                         </FormLabel>
-//                       </FormItem>
-//                     )
-//                   }}
-//                 />
-//               ))}
-//               <FormMessage />
-//             </FormItem>
-//           )}
-//         />
-//         <Button type="submit">Submit</Button>
-//       </form>
-//     </Form>
-//   )
-// }

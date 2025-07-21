@@ -24,7 +24,7 @@ const Services = () => {
         </p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5">
-        {services?.data.map((service) => (
+        {services?.data.map((service: ServiceData) => (
           <ServiceCard
             id={service.id}
             image={service.image}
