@@ -70,7 +70,7 @@ const ServiceForm = () => {
       toast.success("Booking Succesfull");
       form.reset();
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Please Try Again");
     }
   }
@@ -90,7 +90,6 @@ const ServiceForm = () => {
                 <FormLabel className="sm:text-lg">First Name</FormLabel>
                 <FormControl>
                   <Input value={user?.name} className="w-full" readOnly />
-                  
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -116,7 +115,7 @@ const ServiceForm = () => {
               <FormItem className="space-y-1">
                 <FormLabel className="sm:text-lg">Email Address</FormLabel>
                 <FormControl>
-                  <Input value={user?.email} className="w-full" readOnly/>
+                  <Input value={user?.email} className="w-full" readOnly />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -156,7 +155,7 @@ const ServiceForm = () => {
                       <SelectValue placeholder="Select Time Period" />
                     </SelectTrigger>
                     <SelectContent className="bg-white overflow-auto">
-                      {timePeriods.map((item,index) => (
+                      {timePeriods.map((item, index) => (
                         <SelectItem
                           value={item}
                           key={index}

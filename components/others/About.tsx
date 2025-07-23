@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useGetHomeSectionQuery } from "@/store/apiSlice";
+import { refineImagePath } from "@/lib/utils";
 
 const About = () => {
   const { data: home } = useGetHomeSectionQuery();
@@ -15,7 +16,7 @@ const About = () => {
           {/* First Section */}
           <div className="">
             <Image
-              src={home ? home?.image : ""}
+              src={home ? refineImagePath(home.image) : ""}
               alt="Home Image"
               width={0}
               height={0}

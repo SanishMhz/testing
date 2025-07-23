@@ -1,3 +1,4 @@
+import { refineImagePath } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
@@ -6,7 +7,7 @@ const WhyChooseCard = ({ image, title, description }: ChooseCardType) => {
     <div className="flex flex-col bg-white rounded-md">
       <div className="w-full rounded-md h-60">
         <Image
-          src={image}
+          src={refineImagePath(image)}
           alt="chose image"
           sizes="100vw"
           width={0}

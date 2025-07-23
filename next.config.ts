@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  webpack(config, { isServer }) {
+  webpack(config) {
     // Option 1: Disable persistent caching (temp fix)
     config.cache = false;
 

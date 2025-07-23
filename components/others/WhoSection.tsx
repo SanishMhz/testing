@@ -1,5 +1,6 @@
 "use client";
 import { about } from "@/constants";
+import { refineImagePath } from "@/lib/utils";
 import { useGetWhoSectionQuery } from "@/store/apiSlice";
 import Image from "next/image";
 import { useState } from "react";
@@ -42,7 +43,7 @@ const WhoSection = () => {
         {whoWeAre?.data.map((who: WhoSectionData) => (
           <div className="w-full" key={who.id}>
             <Image
-              src={who ? who?.image : ""}
+              src={who ? refineImagePath(who.image) : ""}
               alt="Who We Are"
               width={0}
               height={0}

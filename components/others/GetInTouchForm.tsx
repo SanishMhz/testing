@@ -15,10 +15,7 @@ import { Textarea } from "../ui/textarea";
 import { useSubmitContactMutation } from "@/store/apiSlice";
 import toast from "react-hot-toast";
 const formSchema = z.object({
-  name: z
-    .string()
-    .min(3, "First name must be at least 3 characters")
-    .max(50),
+  name: z.string().min(3, "First name must be at least 3 characters").max(50),
   last_name: z
     .string()
     .min(3, "Last name must be at least 3 character")
@@ -42,21 +39,19 @@ const GetInTouchForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("get in touch")
-   try {
-    await submitContact({
-      first_name: values.name,
-      last_name: "",
-      phone: values.phone,
-      message: values.message,
-    }).unwrap();
-    toast.success("Thank You For get in touch with us.")
-    form.reset()
-   } catch (error) {
-    console.log(error)
-    toast.error("Something went wrong.Please Try Again!!")
-    
-   }
+    try {
+      await submitContact({
+        first_name: values.name,
+        last_name: "",
+        phone: values.phone,
+        message: values.message,
+      }).unwrap();
+      toast.success("Thank You For get in touch with us.");
+      form.reset();
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong.Please Try Again!!");
+    }
   }
   return (
     <Form {...form}>
@@ -91,13 +86,20 @@ const GetInTouchForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Textarea placeholder="Hi there, how are you?" {...field} className="w-60" />
+                <Textarea
+                  placeholder="Hi there, how are you?"
+                  {...field}
+                  className="w-60"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button className="bg-white hover:bg-gray-100 text-[#361631] font-semibold" type="submit">
+        <Button
+          className="bg-white hover:bg-gray-100 text-[#361631] font-semibold"
+          type="submit"
+        >
           Submit
         </Button>
       </form>

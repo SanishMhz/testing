@@ -9,7 +9,6 @@ import { useGetPrimaryContactQuery } from "@/store/apiSlice";
 
 const Connect = () => {
   const { data: primary } = useGetPrimaryContactQuery();
-  console.log("Primary", primary);
   return (
     <div
       className="flex flex-col gap-4 py-8  px-4 sm:px-8 md:px-12 lg:px-16"
@@ -27,7 +26,10 @@ const Connect = () => {
           <div className="space-y-2  text-gray-700" key={primary.id}>
             <p className="text-base">{primary.email}</p>
             <div className="flex gap-5 items-center justify-center">
-              <Link href="https://www.facebook.com/p/Vedic-Healing-Center-100083107520028/" target="_blank">
+              <Link
+                href="https://www.facebook.com/p/Vedic-Healing-Center-100083107520028/"
+                target="_blank"
+              >
                 <FaFacebook size={22} />
               </Link>
               <Link href="#">
