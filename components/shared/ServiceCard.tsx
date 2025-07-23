@@ -1,15 +1,19 @@
 "use client";
+import { refineImagePath } from "@/lib/utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 const ServiceCard = ({ id, title, image }: ServiceCardType) => {
-  const router=useRouter()
+  const router = useRouter();
   return (
-    <div className="relative cursor-pointer" onClick={()=>router.push(`/service/${id}`)}>
+    <div
+      className="relative cursor-pointer"
+      onClick={() => router.push(`/service/${id}`)}
+    >
       <div className="absolute w-full h-full bg-black opacity-50 hover:opacity-60 rounded sm:rounded-md z-10" />
-     <div className="w-full h-36 sm:h-44">
+      <div className="w-full h-36 sm:h-44">
         <Image
-          src={image}
+          src={refineImagePath(image)}
           alt="service image"
           sizes="100vw"
           width={0}

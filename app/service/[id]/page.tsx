@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Login } from "@/components/others/Login";
 import ServiceForm from "@/components/shared/ServiceForm";
+import { refineImagePath } from "@/lib/utils";
 export interface ServiceData {
   id: string;
   created_at: number;
@@ -81,7 +82,7 @@ const ServicePage = () => {
           <div className="flex-1 w-full space-y-3">
             {service?.image && (
               <Image
-                src={service?.image}
+                src={service?.image ? refineImagePath(service.image) : ""}
                 alt={service?.title}
                 width={0}
                 height={0}
